@@ -80,15 +80,15 @@ public class MapReduceTester {
 	public void testReducer() {
 
 		List<DoubleWritable> values = new ArrayList<DoubleWritable>();
-		values.add(new DoubleWritable(3.00));
-		values.add(new DoubleWritable(4.00));
+		values.add(new DoubleWritable(26.00));
+		values.add(new DoubleWritable(32.00));
 		
 		reduceDriver.withInput(new Text("Sao Tome and Principe"), values);
 		
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		reduceDriver.withOutput(new Text("Sao Tome and Principe"), new Text("Average: 3.5, Standard Dev: 0.0"));
+		reduceDriver.withOutput(new Text("Sao Tome and Principe"), new Text("Average: 29.0, Standard Dev: 3.0"));
 
 		/*
 		 * Run the test.
@@ -107,7 +107,7 @@ public class MapReduceTester {
 		/*
 		 * The expected output (from the reducer) is "cat 2", "dog 1". 
 		 */
-		mapReduceDriver.addOutput(new Text("Sao Tome and Principe"), new Text("Average: 4.0, Standard Dev: 0.0"));
+		mapReduceDriver.addOutput(new Text("Sao Tome and Principe"), new Text("Average: 3.625, Standard Dev: 1.125"));
 
 		/*
 		 * Run the test.

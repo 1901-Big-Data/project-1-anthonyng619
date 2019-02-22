@@ -32,6 +32,9 @@ public class FGraduateReducer extends Reducer<Text, DoubleWritable, Text, Text>{
         }
 		
 		double stdDevResult = Math.sqrt(stdDev/count);
+		if(avg - stdDevResult > 30.0) {
+			return;
+		}
 		String retVal = new String("Average: "+avg + ", Standard Dev: " + stdDevResult);
 		
 		context.write(value, new Text(retVal));
