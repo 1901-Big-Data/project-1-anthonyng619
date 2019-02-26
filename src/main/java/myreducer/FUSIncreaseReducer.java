@@ -1,6 +1,7 @@
 package myreducer;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class FUSIncreaseReducer extends Reducer<Text, DoubleWritable, Text, Text
 		}
 		double avgIncrease = sum/((double)differences.size());
 		
-		String retVal = new String("Average Increase: " + avgIncrease);
+		DecimalFormat df = new DecimalFormat("#0.000");
+		String retVal = new String("Average Increase: " + df.format(avgIncrease));
 		
 		context.write(key, new Text(retVal));
 		

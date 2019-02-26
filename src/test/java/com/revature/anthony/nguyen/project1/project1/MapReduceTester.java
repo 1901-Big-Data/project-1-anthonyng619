@@ -88,7 +88,7 @@ public class MapReduceTester {
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		reduceDriver.withOutput(new Text("Sao Tome and Principe"), new Text("Average: 29.0, Standard Dev: 3.0"));
+		reduceDriver.withOutput(new Text("Sao Tome and Principe"), new Text("Average: 29.000, Standard Dev: 3.000"));
 
 		/*
 		 * Run the test.

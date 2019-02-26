@@ -1,6 +1,7 @@
 package myreducer;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +30,10 @@ public class MEmploymentReducer extends Reducer<Text, DoubleWritable, Text, Text
 		if(differences.isEmpty()) return;
 
 		StringBuilder changes = new StringBuilder();
-		
+		DecimalFormat df = new DecimalFormat("#0.000");
 		for(double val : differences) {
-			changes.append(val+",");
+			
+			changes.append(df.format(val)+",");
 		}
 		
 		String retVal = new String("Average Increase: " + changes);

@@ -1,6 +1,7 @@
 package myreducer;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +36,9 @@ public class FGraduateReducer extends Reducer<Text, DoubleWritable, Text, Text>{
 		if(avg - stdDevResult > 30.0) {
 			return;
 		}
-		String retVal = new String("Average: "+avg + ", Standard Dev: " + stdDevResult);
+		DecimalFormat df = new DecimalFormat("#0.000");
+		
+		String retVal = new String("Average: "+ df.format(avg) + ", Standard Dev: " + df.format(stdDevResult));
 		
 		context.write(value, new Text(retVal));
 	}

@@ -115,7 +115,7 @@ public class Q2Tester {
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		reduceDriver.withOutput(new Text("Educational attainment female"), new Text("Average Increase: 0.0"));
+		reduceDriver.withOutput(new Text("Educational attainment female"), new Text("Average Increase: 0.000"));
 
 		/*
 		 * Run the test.
@@ -153,7 +153,7 @@ public class Q2Tester {
 		/*
 		 * The expected output (from the reducer) is "cat 2", "dog 1". 
 		 */
-		mapReduceDriver.addOutput(new Text("Educational attainment female"), new Text("Average Increase: 2.0"));
+		mapReduceDriver.addOutput(new Text("Educational attainment female"), new Text("Average Increase: 2.000"));
 
 		/*
 		 * Run the test.
