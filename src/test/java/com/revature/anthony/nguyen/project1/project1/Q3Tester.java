@@ -92,8 +92,8 @@ public class Q3Tester {
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		mapDriver.withOutput(new Text("Employment male"), new DoubleWritable(20.00));
-		mapDriver.withOutput(new Text("Employment male"), new DoubleWritable(22.00));
+		mapDriver.withOutput(new Text("USA, Employment male"), new DoubleWritable(20.00));
+		mapDriver.withOutput(new Text("USA, Employment male"), new DoubleWritable(22.00));
 
 		/*
 		 * Run the test.
@@ -108,12 +108,12 @@ public class Q3Tester {
 		values.add(new DoubleWritable(26.00));
 		values.add(new DoubleWritable(26.00));
 		
-		reduceDriver.withInput(new Text("Employment male"), values);
+		reduceDriver.withInput(new Text("USA, Employment male"), values);
 		
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		reduceDriver.withOutput(new Text("Employment male"), new Text("Average Increase: 0.0,"));
+		reduceDriver.withOutput(new Text("USA, Employment male"), new Text("Average Increase: 0.0,"));
 
 		/*
 		 * Run the test.
@@ -152,7 +152,7 @@ public class Q3Tester {
 		/*
 		 * The expected output (from the reducer) is "cat 2", "dog 1". 
 		 */
-		mapReduceDriver.addOutput(new Text("Employment male"), new Text("Average Increase: 2.0,2.0,"));
+		mapReduceDriver.addOutput(new Text("USA, Employment male"), new Text("Average Increase: 2.0,2.0,"));
 
 		/*
 		 * Run the test.

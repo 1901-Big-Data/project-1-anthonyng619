@@ -1,5 +1,9 @@
+com/revature/anthony/nguyen/project1/project1/mymappers/FEmploymentMapper.class
+myreducer/FGraduateReducer.class
+myreducer/FUSIncreaseReducer.class
+myreducer/FEmploymentReducer.class
 com/revature/anthony/nguyen/project1/project1/mymappers/FUSIncreaseMapper.class
 com/revature/anthony/nguyen/project1/project1/mymappers/FGraduateMapper.class
 com/revature/anthony/nguyen/project1/project1/Driver.class
-myreducer/FGraduateReducer.class
-myreducer/FUSIncreaseReducer.class
+myreducer/MEmploymentReducer.class
+com/revature/anthony/nguyen/project1/project1/mymappers/MEmploymentMapper.class
