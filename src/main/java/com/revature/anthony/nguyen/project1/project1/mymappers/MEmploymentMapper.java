@@ -26,12 +26,24 @@ public class MEmploymentMapper extends Mapper<LongWritable, Text, Text, DoubleWr
 		if(!(columns[DataHeader.getIndex("Indicator Code")].toLowerCase().contains("emp") && columns[DataHeader.getIndex("Indicator Code")].toLowerCase().contains("ma"))) {
 			return;
 		}
-		for(int i =DataHeader.getIndex("2000"); i < columns.length; i++) {
+		
+		double lastNum = 0.0;
+		for(int i =DataHeader.getIndex("1999"); i < columns.length; i++) {
 			try {
+				if(lastNum == 0.0) {
+					lastNum = Double.parseDouble(columns[i].substring(1, columns[i].length()-1));
+					continue;
+				}
+				
 				String string = columns[i].substring(1, columns[i].length()-1);
-				DoubleWritable val = new DoubleWritable(Double.parseDouble(string));
-				String countryKey = columns[DataHeader.getIndex("Country Code")].substring(1, columns[DataHeader.getIndex("Country Code")].length()-1) + ", " + columns[DataHeader.getIndex("Indicator Name")].substring(1, columns[DataHeader.getIndex("Indicator Name")].length()-1);
-				context.write(new Text(countryKey), val);
+				double val = Double.parseDouble(string);
+				
+				double difference = val-lastNum;
+				
+				String year = DataHeader.getLabel(i);
+				
+				// Key = year, Value = percentage
+				context.write(new Text(year), new DoubleWritable(difference));
 			} catch (NumberFormatException e) {
 				
 			}

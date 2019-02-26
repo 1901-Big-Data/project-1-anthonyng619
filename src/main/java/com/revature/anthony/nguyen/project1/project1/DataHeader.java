@@ -13,5 +13,9 @@ public class DataHeader {
 	public static int getIndex(String string) {
 		return header.indexOf(string);
 	}
+	
+	public static String getLabel(int index) {
+		return header.get(index);
+	}
 
 }

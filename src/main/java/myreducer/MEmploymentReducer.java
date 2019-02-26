@@ -13,31 +13,35 @@ import org.apache.hadoop.mapreduce.Reducer;
 public class MEmploymentReducer extends Reducer<Text, DoubleWritable, Text, Text>{
 	@Override
 	public void reduce(Text key, Iterable<DoubleWritable> list, Context context) throws IOException, InterruptedException {
-		boolean first = true;
-		double lastNum = 0.0;
-		List<Double> differences = new ArrayList<Double>();
+		double sum = 0.0;
+		double stdDev = 0.0;
+		double count = 0.0;
+		List<DoubleWritable> cache = new ArrayList<DoubleWritable>();
 		
 		for(DoubleWritable val : list) {
-			if(first) {
-				first = false;
-				lastNum = val.get(); 
-			} else {
-				double rateIncreased = val.get() - lastNum;
-				differences.add(rateIncreased);
-				lastNum = val.get();
-			}
+			cache.add(val);
+			sum += val.get();
+			count++;
 		}
-		if(differences.isEmpty()) return;
-
-		StringBuilder changes = new StringBuilder();
+		if(count == 0.0) {
+			return;
+		}
+		double avg = sum / count;
+		
+		for(DoubleWritable num: cache) {
+            stdDev += Math.pow(num.get() - avg, 2);
+        }
+		
+		double stdDevResult = Math.sqrt(stdDev/count);
+		if(avg - stdDevResult > 30.0) {
+			return;
+		}
+		
 		DecimalFormat df = new DecimalFormat("#0.000");
-		for(double val : differences) {
-			
-			changes.append(df.format(val)+",");
-		}
 		
-		String retVal = new String("Average Increase: " + changes);
+		String retVal = new String("Average Increase: " + df.format(avg) +" Standard Deviation: " + df.format(stdDevResult));
 		
+		// Key = year, Value = global average change that year
 		context.write(key, new Text(retVal));
 
 	}
