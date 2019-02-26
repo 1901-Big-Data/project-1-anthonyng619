@@ -12,9 +12,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import com.revature.anthony.nguyen.project1.project1.mymappers.FGraduateMapper;
 import com.revature.anthony.nguyen.project1.project1.mymappers.FUSIncreaseMapper;
+import com.revature.anthony.nguyen.project1.project1.mymappers.MEmploymentMapper;
 
 import myreducer.FGraduateReducer;
 import myreducer.FUSIncreaseReducer;
+import myreducer.MEmploymentReducer;
 
 public class Driver {
 	public static void main(String[] args) throws Exception {
@@ -47,7 +49,7 @@ public class Driver {
 		System.exit(success ? 0 : 1);
 		*/
 		
-		
+		/*
 		Job job_q2 = new Job();
 		
 		job_q2.setJarByClass(Driver.class);
@@ -65,6 +67,28 @@ public class Driver {
 		
 		boolean success = job_q2.waitForCompletion(true);
 		System.exit(success ? 0 : 1);
+		*/
+		
+		// Question 3
+		Job job_q3 = new Job();
+		
+		job_q3.setJarByClass(Driver.class);
+		
+		job_q3.setJobName("Male Employment Changes since 2000");
+		
+		FileInputFormat.setInputPaths(job_q3, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job_q3, new Path(args[1]));
+		
+		job_q3.setMapperClass(MEmploymentMapper.class);
+		job_q3.setReducerClass(MEmploymentReducer.class);
+		
+		job_q3.setMapOutputKeyClass(Text.class);
+		job_q3.setMapOutputValueClass(DoubleWritable.class);
+		
+		boolean success = job_q3.waitForCompletion(true);
+		System.exit(success ? 0 : 1);
+		
+		
 		
 	}
 }
