@@ -23,7 +23,7 @@ public class MEmploymentMapper extends Mapper<LongWritable, Text, Text, DoubleWr
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 		String line = value.toString();
 		String[] columns = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-		if(!(columns[DataHeader.getIndex("Indicator Code")].toLowerCase().contains("emp") && columns[DataHeader.getIndex("Indicator Code")].toLowerCase().contains("ma"))) {
+		if(!(columns[DataHeader.getIndex("Indicator Code")].contains("SL.EMP.TOTL.SP.MA.ZS"))) {
 			return;
 		}
 		
@@ -42,8 +42,8 @@ public class MEmploymentMapper extends Mapper<LongWritable, Text, Text, DoubleWr
 				
 				String year = DataHeader.getLabel(i);
 				
-				// Key = year, Value = percentage
-				context.write(new Text(year), new DoubleWritable(difference));
+				// Key = country, Value = percentage
+				context.write(new Text(columns[DataHeader.getIndex("Country Code")]), new DoubleWritable(difference));
 			} catch (NumberFormatException e) {
 				
 			}

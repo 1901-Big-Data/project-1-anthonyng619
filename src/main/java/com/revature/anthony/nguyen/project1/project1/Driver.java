@@ -70,6 +70,7 @@ public class Driver {
 		*/
 		
 		// Question 3
+		
 		Job job_q3 = new Job();
 		
 		job_q3.setJarByClass(Driver.class);
@@ -89,6 +90,25 @@ public class Driver {
 		System.exit(success ? 0 : 1);
 		
 		
+		/*
+		Job job_q4 = new Job();
+		
+		job_q4.setJarByClass(Driver.class);
+		
+		job_q4.setJobName("Male Employment Changes since 2000");
+		
+		FileInputFormat.setInputPaths(job_q4, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job_q4, new Path(args[1]));
+		
+		job_q4.setMapperClass(MEmploymentMapper.class);
+		job_q4.setReducerClass(MEmploymentReducer.class);
+		
+		job_q4.setMapOutputKeyClass(Text.class);
+		job_q4.setMapOutputValueClass(DoubleWritable.class);
+		
+		boolean success = job_q4.waitForCompletion(true);
+		System.exit(success ? 0 : 1);
+		*/
 		
 	}
 }

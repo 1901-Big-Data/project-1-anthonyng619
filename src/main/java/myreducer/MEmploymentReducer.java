@@ -33,16 +33,13 @@ public class MEmploymentReducer extends Reducer<Text, DoubleWritable, Text, Text
         }
 		
 		double stdDevResult = Math.sqrt(stdDev/count);
-		if(avg - stdDevResult > 30.0) {
-			return;
-		}
 		
 		DecimalFormat df = new DecimalFormat("#0.000");
 		
-		String retVal = new String("Average Increase: " + df.format(avg) +" Standard Deviation: " + df.format(stdDevResult));
+		String retVal = new String("Avg: " + df.format(avg) +" StdDev: " + df.format(stdDevResult));
 		
 		// Key = year, Value = global average change that year
-		context.write(key, new Text(retVal));
+		context.write(new Text(key + "   "), new Text(retVal));
 
 	}
 }

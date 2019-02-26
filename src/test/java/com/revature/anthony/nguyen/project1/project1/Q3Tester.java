@@ -63,7 +63,7 @@ public class Q3Tester {
 		testString[0] = "\"United States of America\"";
 		testString[1] = "\"USA\"";
 		testString[2] = "\"Employment male\"";
-		testString[3] = "\"EMP.TER.CUAT.MS.MA.ZS\"";
+		testString[3] = "\"SL.EMP.TOTL.SP.MA.ZS\"";
 		testString[46] = "\"20.00\"";
 		testString[47] = "\"22.00\"";
 		
@@ -127,7 +127,7 @@ public class Q3Tester {
 		testString[0] = "\"United States of America\"";
 		testString[1] = "\"USA\"";
 		testString[2] = "\"Employment male\"";
-		testString[3] = "\"EMP.TER.CUAT.MS.MA.ZS\"";
+		testString[3] = "\"SL.EMP.TOTL.SP.MA.ZS\"";
 		testString[44] = "\"20.00\"";
 		testString[45] = "\"22.00\"";
 		testString[46] = "\"24.00\"";
