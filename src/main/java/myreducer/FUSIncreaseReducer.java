@@ -10,34 +10,38 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class FUSIncreaseReducer extends Reducer<Text, DoubleWritable, Text, Text>{
+	/**
+	 * Sums up all the values of each key and writes the key and averages as well as standard deviation.
+	 */
 	@Override
 	public void reduce(Text key, Iterable<DoubleWritable> list, Context context) throws IOException, InterruptedException {
-		boolean first = true;
-		double lastNum = 0.0;
-		List<Double> differences = new ArrayList<Double>();
+		double sum = 0.0;
+		double stdDev = 0.0;
+		double count = 0.0;
+		List<DoubleWritable> cache = new ArrayList<DoubleWritable>();
 		
 		for(DoubleWritable val : list) {
-			if(first) {
-				first = false;
-				lastNum = val.get(); 
-			} else {
-				double rateIncreased = val.get() - lastNum;
-				differences.add(rateIncreased);
-				lastNum = val.get();
-			}
+			cache.add(val);
+			sum += val.get();
+			count++;
 		}
-		if(differences.isEmpty()) return;
-		double sum = 0.0;
-		for(double val : differences) {
-			sum += val;
+		if(count == 0.0) {
+			return;
 		}
-		double avgIncrease = sum/((double)differences.size());
+		double avg = sum / count;
+		
+		for(DoubleWritable num: cache) {
+            stdDev += Math.pow(num.get() - avg, 2);
+        }
+		
+		double stdDevResult = Math.sqrt(stdDev/count);
 		
 		DecimalFormat df = new DecimalFormat("#0.000");
-		String retVal = new String("Average Increase: " + df.format(avgIncrease));
 		
-		context.write(key, new Text(retVal));
+		String retVal = new String("Avg: " + df.format(avg) +" StdDev: " + df.format(stdDevResult));
 		
-		//context.write(key, new Text("1"));
+		// Key = year, Value = global average change that year
+		context.write(new Text(key + "   "), new Text(retVal));
+
 	}
 }

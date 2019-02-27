@@ -8,9 +8,9 @@ import java.util.List;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.Reducer.Context;
 
-
-public class MEmploymentReducer extends Reducer<Text, DoubleWritable, Text, Text>{
+public class GDPReducer extends Reducer<Text, DoubleWritable, Text, Text> {
 	/**
 	 * Sums up all the values of each key and writes the key and averages as well as standard deviation.
 	 */

@@ -11,11 +11,14 @@ import org.apache.hadoop.mapreduce.Mapper.Context;
 import com.revature.anthony.nguyen.project1.project1.DataHeader;
 
 public class FEmploymentMapper extends Mapper<LongWritable, Text, Text, DoubleWritable>{
+	/**
+	 * Extract all female employment under a strict indicator code starting with the year 1999
+	 */
 	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 		String line = value.toString();
 		String[] columns = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-		if(!(columns[DataHeader.getIndex("Indicator Code")].contains("SL.EMP.TOTL.SP.MA.ZS"))) {
+		if(!(columns[DataHeader.getIndex("Indicator Code")].contains("SL.EMP.TOTL.SP.FE.ZS"))) {
 			return;
 		}
 		

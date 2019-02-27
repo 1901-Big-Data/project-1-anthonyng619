@@ -7,7 +7,7 @@
 
 	<!-- Change name of jar to keep it simple -->
 	<build>
-		<finalName>project1</finalName>
+		<finalName>project1q2</finalName>
 	</build>
 
 	<!-- Make project Java 8 -->

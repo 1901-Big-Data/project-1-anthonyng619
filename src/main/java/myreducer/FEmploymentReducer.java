@@ -12,6 +12,9 @@ import org.apache.hadoop.mapreduce.Reducer.Context;
 
 
 public class FEmploymentReducer extends Reducer<Text, DoubleWritable, Text, Text>{
+	/**
+	 * Sums up all the values of each key and writes the key and averages as well as standard deviation.
+	 */
 	@Override
 	public void reduce(Text key, Iterable<DoubleWritable> list, Context context) throws IOException, InterruptedException {
 		double sum = 0.0;

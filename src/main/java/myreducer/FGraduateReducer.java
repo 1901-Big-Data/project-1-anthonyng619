@@ -11,6 +11,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class FGraduateReducer extends Reducer<Text, DoubleWritable, Text, Text>{
+	/**
+	 * Sums up all the values of each key and writes the key and averages as well as standard deviation.
+	 */
 	@Override
 	public void reduce(Text value, Iterable<DoubleWritable> list, Context context) throws IOException, InterruptedException {
 		double sum = 0.0;
