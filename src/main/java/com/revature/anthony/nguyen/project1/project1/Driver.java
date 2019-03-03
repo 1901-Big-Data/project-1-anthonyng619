@@ -53,7 +53,7 @@ public class Driver {
 		System.exit(success ? 0 : 1);
 		*/
 		
-		
+		/*
 		Job job_q2 = new Job();
 		
 		job_q2.setJarByClass(Driver.class);
@@ -71,7 +71,7 @@ public class Driver {
 		
 		boolean success = job_q2.waitForCompletion(true);
 		System.exit(success ? 0 : 1);
-		
+		*/
 		
 		// Question 3
 		
@@ -95,7 +95,7 @@ public class Driver {
 		System.exit(success ? 0 : 1);
 		*/
 		
-		/*
+		
 		Job job_q4 = new Job();
 		
 		job_q4.setJarByClass(Driver.class);
@@ -113,7 +113,7 @@ public class Driver {
 		
 		boolean success = job_q4.waitForCompletion(true);
 		System.exit(success ? 0 : 1);
-		*/
+		 
 		
 		/*
 		Job job_q5 = new Job();

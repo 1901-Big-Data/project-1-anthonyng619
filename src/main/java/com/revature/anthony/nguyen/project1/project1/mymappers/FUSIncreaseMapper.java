@@ -19,20 +19,30 @@ public class FUSIncreaseMapper extends Mapper<LongWritable, Text, Text, DoubleWr
 		String line = value.toString();
 		String[] columns = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 		if(!(columns[DataHeader.getIndex("Country Code")].toLowerCase().contains("usa") &&
-				columns[DataHeader.getIndex("Indicator Code")].toLowerCase().contains("se") && columns[DataHeader.getIndex("Inidicator Code")].toLowerCase().contains("fe"))) {
+				columns[DataHeader.getIndex("Indicator Code")].toLowerCase().contains("se") && columns[DataHeader.getIndex("Indicator Code")].toLowerCase().contains("fe"))) {
 			return;
 		}
-		for(int i = DataHeader.getIndex("2000"); i < columns.length; i++) {
+		
+		double lastNum = 0.0;
+		for(int i =DataHeader.getIndex("1999"); i < columns.length; i++) {
 			try {
+				if(lastNum == 0.0) {
+					lastNum = Double.parseDouble(columns[i].substring(1, columns[i].length()-1));
+					continue;
+				}
+				
 				String string = columns[i].substring(1, columns[i].length()-1);
-				DoubleWritable val = new DoubleWritable(Double.parseDouble(string));
-				context.write(new Text(columns[DataHeader.getIndex("Indicator Name")].substring(1, columns[DataHeader.getIndex("Indicator Name")].length()-1)), val);
+				double val = Double.parseDouble(string);
+				
+				double difference = val-lastNum;
+				
+				String year = DataHeader.getLabel(i);
+				
+				// Key = country, Value = percentage
+				context.write(new Text(columns[DataHeader.getIndex("Indicator Name")]), new DoubleWritable(difference));
 			} catch (NumberFormatException e) {
-				//System.out.println("Nope");
+				
 			}
 		}
-		/*if(columns[1].toLowerCase().contains("usa")) {
-			context.write(new Text(columns[1]), new DoubleWritable(1.0));
-		}*/
 	}
 }

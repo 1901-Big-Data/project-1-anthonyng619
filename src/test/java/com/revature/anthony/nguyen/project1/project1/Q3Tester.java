@@ -92,7 +92,7 @@ public class Q3Tester {
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		mapDriver.withOutput(new Text("2003"), new DoubleWritable(2.0));
+		mapDriver.withOutput(new Text("\"USA\""), new DoubleWritable(2.0));
 
 		/*
 		 * Run the test.
@@ -112,7 +112,7 @@ public class Q3Tester {
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		reduceDriver.withOutput(new Text("2003"), new Text("Average Increase: 3.000 Standard Deviation: 0.500"));
+		reduceDriver.withOutput(new Text("2003   "), new Text("Avg: 3.000 StdDev: 0.500"));
 
 		/*
 		 * Run the test.
@@ -151,8 +151,7 @@ public class Q3Tester {
 		/*
 		 * The expected output (from the reducer) is "cat 2", "dog 1". 
 		 */
-		mapReduceDriver.addOutput(new Text("2001"), new Text("Average Increase: 2.000 Standard Deviation: 0.000"));
-		mapReduceDriver.addOutput(new Text("2002"), new Text("Average Increase: 4.000 Standard Deviation: 0.000"));
+		mapReduceDriver.addOutput(new Text("\"USA\"   "), new Text("Avg: 3.000 StdDev: 1.000"));
 
 		/*
 		 * Run the test.

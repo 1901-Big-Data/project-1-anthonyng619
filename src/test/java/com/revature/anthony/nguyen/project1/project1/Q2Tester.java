@@ -64,7 +64,7 @@ public class Q2Tester {
 		String[] testString = new String[50];
 		testString[0] = "\"United States of America\"";
 		testString[1] = "\"USA\"";
-		testString[2] = "\"Educational, attainment female\"";
+		testString[2] = "\"Educational attainment female\"";
 		testString[3] = "\"SE.TER.CUAT.MS.FE.ZS\"";
 		testString[46] = "\"20.00\"";
 		testString[47] = "\"22.00\"";
@@ -94,8 +94,7 @@ public class Q2Tester {
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		mapDriver.withOutput(new Text("Educational, attainment female"), new DoubleWritable(20.00));
-		mapDriver.withOutput(new Text("Educational, attainment female"), new DoubleWritable(22.00));
+		mapDriver.withOutput(new Text("\"Educational attainment female\""), new DoubleWritable(2.00));
 
 		/*
 		 * Run the test.
@@ -115,7 +114,7 @@ public class Q2Tester {
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		reduceDriver.withOutput(new Text("Educational attainment female"), new Text("Average Increase: 0.000"));
+		reduceDriver.withOutput(new Text("Educational attainment female   "), new Text("Avg: 26.000 StdDev: 0.000"));
 
 		/*
 		 * Run the test.
@@ -153,7 +152,7 @@ public class Q2Tester {
 		/*
 		 * The expected output (from the reducer) is "cat 2", "dog 1". 
 		 */
-		mapReduceDriver.addOutput(new Text("Educational attainment female"), new Text("Average Increase: 2.000"));
+		mapReduceDriver.addOutput(new Text("\"Educational attainment female\"   "), new Text("Avg: 2.000 StdDev: 0.000"));
 
 		/*
 		 * Run the test.

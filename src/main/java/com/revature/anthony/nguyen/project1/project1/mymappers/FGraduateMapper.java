@@ -23,7 +23,7 @@ public class FGraduateMapper extends Mapper<LongWritable, Text, Text, DoubleWrit
 		if(!line.contains("SE.TER.CMPL.FE.ZS")) {
 			return;
 		}
-		String[] columns = line.split(",");
+		String[] columns = line.split(",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)");
 		for(int i = DataHeader.getIndex("1960"); i < columns.length; i++) {
 			try {
 				String string = columns[i].substring(1, columns[i].length()-1);

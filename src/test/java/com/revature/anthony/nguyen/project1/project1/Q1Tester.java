@@ -16,7 +16,7 @@ import com.revature.anthony.nguyen.project1.project1.mymappers.FGraduateMapper;
 
 import myreducer.FGraduateReducer;
 
-public class MapReduceTester {
+public class Q1Tester {
 	/*
 	 * Declare harnesses that let you test a mapper, a reducer, and
 	 * a mapper and a reducer working together.
@@ -62,13 +62,13 @@ public class MapReduceTester {
 		/*
 		 * For this test, the mapper's input will be "1 cat cat dog" 
 		 */
-		mapDriver.withInput(new LongWritable(1), new Text("\"Sao Tome and Principe\",\"STP\",\"Educational attainment at least Bachelor's or equivalent population 25+ female (%) (cumulative)\",\"SE.TER.CUAT.BA.FE.ZS\",\"2.17914\",,"));
+		mapDriver.withInput(new LongWritable(1), new Text("\"Sao Tome and Principe\",\"STP\",\"Educational attainment at least Bachelor's or equivalent population 25+ female (%) (cumulative)\",\"SE.TER.CMPL.FE.ZS\",\"2.17914\",\"2.17914\","));
 
-			System.out.println("\"Sao Tome and Principe\",\"STP\",\"Educational attainment at least Bachelor's or equivalent population 25+ female (%) (cumulative)\",\"SE.TER.CUAT.BA.FE.ZS\",\"2.17914\",,");
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		mapDriver.withOutput(new Text("Sao Tome and Principe"), new DoubleWritable(2.17914));
+		mapDriver.withOutput(new Text("STP"), new DoubleWritable(2.17914));
+		mapDriver.withOutput(new Text("STP"), new DoubleWritable(2.17914));
 
 		/*
 		 * Run the test.
@@ -83,12 +83,12 @@ public class MapReduceTester {
 		values.add(new DoubleWritable(26.00));
 		values.add(new DoubleWritable(32.00));
 		
-		reduceDriver.withInput(new Text("Sao Tome and Principe"), values);
+		reduceDriver.withInput(new Text("STP"), values);
 		
 		/*
 		 * The expected output is "cat 1", "cat 1", and "dog 1".
 		 */
-		reduceDriver.withOutput(new Text("Sao Tome and Principe"), new Text("Average: 29.000, Standard Dev: 3.000"));
+		reduceDriver.withOutput(new Text("STP"), new Text("Average: 29.000, Standard Dev: 3.000"));
 
 		/*
 		 * Run the test.
@@ -102,12 +102,12 @@ public class MapReduceTester {
 		/*
 		 * For this test, the mapper's input will be "1 cat cat dog" 
 		 */
-		mapReduceDriver.withInput(new LongWritable(1), new Text("\"Sao Tome and Principe\",\"STP\",\"Educational attainment at least Bachelor's or equivalent population 25+ female (%) (cumulative)\",\"SE.TER.CUAT.BA.FE.ZS\",\"3.0\",\"5.0\",\"4.0\",\"2.5\""));
+		mapReduceDriver.withInput(new LongWritable(1), new Text("\"Sao Tome and Principe\",\"STP\",\"Educational attainment at least Bachelor's or equivalent population 25+ female (%) (cumulative)\",\"SE.TER.CMPL.FE.ZS\",\"3.0\",\"5.0\",\"4.0\",\"2.5\""));
 
 		/*
 		 * The expected output (from the reducer) is "cat 2", "dog 1". 
 		 */
-		mapReduceDriver.addOutput(new Text("Sao Tome and Principe"), new Text("Average: 3.625, Standard Dev: 1.125"));
+		mapReduceDriver.addOutput(new Text("STP"), new Text("Average: 3.625, Standard Dev: 1.125"));
 
 		/*
 		 * Run the test.
