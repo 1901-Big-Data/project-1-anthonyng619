@@ -14,12 +14,14 @@ import com.revature.anthony.nguyen.project1.project1.mymappers.FEmploymentMapper
 import com.revature.anthony.nguyen.project1.project1.mymappers.FGraduateMapper;
 import com.revature.anthony.nguyen.project1.project1.mymappers.FUSIncreaseMapper;
 import com.revature.anthony.nguyen.project1.project1.mymappers.GDPMapper;
+import com.revature.anthony.nguyen.project1.project1.mymappers.GDPMapper2;
 import com.revature.anthony.nguyen.project1.project1.mymappers.MEmploymentMapper;
 
 import myreducer.FEmploymentReducer;
 import myreducer.FGraduateReducer;
 import myreducer.FUSIncreaseReducer;
 import myreducer.GDPReducer;
+import myreducer.GDPReducer2;
 import myreducer.MEmploymentReducer;
 
 public class Driver {
@@ -95,7 +97,7 @@ public class Driver {
 		System.exit(success ? 0 : 1);
 		*/
 		
-		
+		/*
 		Job job_q4 = new Job();
 		
 		job_q4.setJarByClass(Driver.class);
@@ -113,14 +115,14 @@ public class Driver {
 		
 		boolean success = job_q4.waitForCompletion(true);
 		System.exit(success ? 0 : 1);
-		 
+		 */
 		
 		/*
 		Job job_q5 = new Job();
 		
 		job_q5.setJarByClass(Driver.class);
 		
-		job_q5.setJobName("Female Employment Changes since 2000");
+		job_q5.setJobName("GDP Change since 2000");
 		
 		FileInputFormat.setInputPaths(job_q5, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job_q5, new Path(args[1]));
@@ -134,5 +136,25 @@ public class Driver {
 		boolean success = job_q5.waitForCompletion(true);
 		System.exit(success ? 0 : 1);
 		*/
+		
+		
+		Job job_q6 = new Job();
+		
+		job_q6.setJarByClass(Driver.class);
+		
+		job_q6.setJobName("GDP Acceleration of Change since 2000");
+		
+		FileInputFormat.setInputPaths(job_q6, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job_q6, new Path(args[1]));
+		
+		job_q6.setMapperClass(GDPMapper2.class);
+		job_q6.setReducerClass(GDPReducer2.class);
+		
+		job_q6.setMapOutputKeyClass(Text.class);
+		job_q6.setMapOutputValueClass(DoubleWritable.class);
+		
+		boolean success = job_q6.waitForCompletion(true);
+		System.exit(success ? 0 : 1);
+		
 	}
 }
